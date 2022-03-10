@@ -6,7 +6,7 @@ import re
 class SizeError(Exception):
     pass
 def sizeValidate(input):
-    pattern = re.compile(r"[0-9]+\\*[0-9]+")
+    pattern = re.compile(r"[0-9]+x[0-9]+")
     return pattern.match(input)
 
 def help():
@@ -14,7 +14,7 @@ def help():
     -h or --help : displays this menu
     -r <input> <size> <output_name>: resize image to custom size
         eg:
-            -r img.png 400*600 result_name.png
+            -r img.png 400x600 result_name.png
 
     -c <input> <output format> : change format of the image 
         eg: 
@@ -30,7 +30,7 @@ def resizer(cmd):
         image = Image.open(arg[1])
         if not sizeValidate(arg[2]):
             raise SizeError
-        size=arg[2].split("*")
+        size=arg[2].split("x")
         image = image.resize((int(size[0]),int(size[1])))
         image.save(arg[3])
         print("done")
