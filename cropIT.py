@@ -1,5 +1,6 @@
 from PIL import Image
 import re
+import glob
 
 
 
@@ -19,11 +20,14 @@ def help():
     -c <input> <output format> : change format of the image 
         eg: 
             -c img.png jpg
+    -ca <input format> <output format> : change all images in one format to other
+        eg:
+            -ca png jpg
     -q or --quit : exit
     """ )
 
 def resizer(cmd):
-    arg=cmd.split(" ")
+    arg=cmd.split(">>>")
     try:
         if len(arg)<4:
             raise IndexError
@@ -40,7 +44,27 @@ def resizer(cmd):
         print("Argument missing")
     except SizeError:
         print("Invalid size")
+def formatAll(cmd):
+    arg=cmd.split(" ")
+    try:
+        if len(arg)<3:
+            raise IndexError
+        for img in glob.glob(f"*.{arg[1]}"):
+            try:
+                image = Image.open(img)
+                image = image.convert("RGB")
+                image.save(img.replace(arg[1],arg[2]))
+                print("done")
+            except FileNotFoundError:
+                print("Invalid path or file")
+            except IndexError:
+                print("Argument missing")
+            except ValueError:
+                print("Invalid Extension")
+    except IndexError:
+        print("Argument missing")
     
+
 def formater(cmd):
     arg=cmd.split(" ")
     try:
@@ -61,15 +85,17 @@ def formater(cmd):
 print("Welcome \nType -h or --help\n ")
 while(1):
     cmd = input("  ")
-    
-    if cmd=="-h" or cmd == "--help":
+    arg=cmd.split(" ")
+    if arg[0]=="-h" or arg[0] == "--help":
         help()
-    elif cmd=="-q" or cmd =="--quit":
+    elif arg[0]=="-q" or arg[0] =="--quit":
         print("see you again")
         break
-    elif cmd[0:2]=="-r":
+    elif arg[0]=="-r":
         resizer(cmd)
-    elif cmd[0:2]=="-c":
+    elif arg[0]=="-ca":
+        formatAll(cmd)
+    elif arg[0]=="-c":
         formater(cmd)
     else:
         print("invalid command")
