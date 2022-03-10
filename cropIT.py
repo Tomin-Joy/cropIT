@@ -22,7 +22,7 @@ def help():
     -q or --quit : exit
     """ )
 
-def resize(cmd):
+def resizer(cmd):
     arg=cmd.split(" ")
     try:
         if len(arg)<4:
@@ -41,7 +41,7 @@ def resize(cmd):
     except SizeError:
         print("Invalid size")
     
-def format(cmd):
+def formater(cmd):
     arg=cmd.split(" ")
     try:
         if len(arg)<3:
@@ -68,8 +68,8 @@ while(1):
         print("see you again")
         break
     elif cmd[0:2]=="-r":
-        resize(cmd)
+        resizer(cmd)
     elif cmd[0:2]=="-c":
-        format(cmd)
+        formater(cmd)
     else:
         print("invalid command")
