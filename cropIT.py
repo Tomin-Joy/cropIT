@@ -82,7 +82,7 @@ def formater(cmd):
     except ValueError:
         print("Invalid Extension")
 
-print("Welcome \nType -h or --help\n ")
+print("Welcome \nType -h or --help")
 while(1):
     cmd = input(">>>")
     arg=cmd.split(" ")
