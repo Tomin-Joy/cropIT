@@ -84,7 +84,7 @@ def formater(cmd):
 
 print("Welcome \nType -h or --help\n ")
 while(1):
-    cmd = input("  ")
+    cmd = input(">>>")
     arg=cmd.split(" ")
     if arg[0]=="-h" or arg[0] == "--help":
         help()
