@@ -27,7 +27,7 @@ def help():
     """ )
 
 def resizer(cmd):
-    arg=cmd.split(">>>")
+    arg=cmd.split(" ")
     try:
         if len(arg)<4:
             raise IndexError
@@ -84,7 +84,7 @@ def formater(cmd):
 
 print("Welcome \nType -h or --help")
 while(1):
-    cmd = input(">>>")
+    cmd = input(">>> ")
     arg=cmd.split(" ")
     if arg[0]=="-h" or arg[0] == "--help":
         help()
